@@ -1,17 +1,101 @@
 /* tests for this route:
   POST
-  /pet
+  /pet/{petId}/uploadImage
 */
-import supertest from 'supertest'
-import {app} from '../../app'
+import request from 'supertest'
 
-describe('template file', () => {
-  describe('method 1 (route name)', () => {
-    describe('given X/scenario', () => {
-      it("expected behaviour", async() => {
-        const itemId = "123";
-        await supertest(app).get(`/api/boilerPlate/${itemId}`).expect(404); // expcted result here
-      })
+const fs = require('mz/fs');
+const app = "https://petstore.swagger.io/v2";
+
+// NOTE: test with live data
+// this test depends on the post method working since it needs to set up before hand
+describe('upload an image to an existing pet', () => {
+  describe('GIVEN petId exists, upload an image to a pet', () => {
+    it("Return 200 status, response message contains the specified file name", async() => {
+
+      let petId = 111;
+      let relativeFilePath = "./src/__test__/__testUtils__/resources/Untitled.png";
+
+      // use post to set up since our only access to the server is through the api
+      let createPayload = {
+        "id": petId,
+        "category": {
+          "id": petId,
+          "name": "string"
+        },
+        "name": "string",
+        "photoUrls": [
+          "string"
+        ],
+        "tags": [
+          {
+            "id": petId,
+            "name": "string"
+          }
+        ],
+        "status": "available"
+      }
+      let createResponse = await request(app)
+                            .post('/pet/')
+                            .send(createPayload)
+                            .set('Content-Type', 'application/json')
+                            .set('Accept', 'application/json');
+      expect(createResponse.statusCode).toBe(200);
+      // expect here to ensure pet is created before we can upload an image to it
+
+      let response = await fs.exists(relativeFilePath).then((exists)=>{
+        if (!exists){
+          throw new Error("File not found");
+        }
+        return request(app)
+                .post(`/pet/${petId}/uploadImage`)
+                .attach('file', relativeFilePath);
+      });
+      expect(response.statusCode).toBe(200);
+      let body = JSON.parse(response.text);
+      expect(body.message).toContain("File uploaded to ./Untitled.png");
+    })
+  })
+})
+
+describe('no image specified when uploading', () => {
+  describe('GIVEN petId exists, call upload method with no attachment', () => {
+    it("Return 400 status", async() => {
+
+      let petId = 222;
+
+      // use post to set up since our only access to the server is through the api
+      let createPayload = {
+        "id": petId,
+        "category": {
+          "id": petId,
+          "name": "string"
+        },
+        "name": "string",
+        "photoUrls": [
+          "string"
+        ],
+        "tags": [
+          {
+            "id": petId,
+            "name": "string"
+          }
+        ],
+        "status": "available"
+      }
+      let createResponse = await request(app)
+                            .post('/pet/')
+                            .send(createPayload)
+                            .set('Content-Type', 'application/json')
+                            .set('Accept', 'application/json');
+      expect(createResponse.statusCode).toBe(200);
+      // expect here to ensure pet is created before we can upload an image to it
+
+      let response = await request(app)
+                            .post(`/pet/${petId}/uploadImage`);
+      expect(response.statusCode).toBe(415);
+      let body = JSON.parse(response.text);
+      expect(body.message).toContain("application/octet-stream was not found");
     })
   })
 })
