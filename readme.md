@@ -1,13 +1,14 @@
-TODO: beautify readme  
+# API Tests
   
-run commands:  
-`yarn test` -> tests the entire project  
-`yarn test ${file name}` -> runs all tests in the specified file  
-`artillery run ${file name}` -> runs the load test
-  
-test plan: [https://docs.google.com/spreadsheets/d/1M_sXd3EaRquolIaVKNciKrh7frPKTksfdzRr7jNa0Q0/edit#gid=0]  
-  
-set up:  
-generic react project https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript  
-`yarn add supertest jest ts-jest @types/jest @types/supertest -D`  
-`yarn ts-jest config:init`  
+### Using [petstore](https://petstore.swagger.io/#/)
+
+##### How to run tests:  
+##### [Test plan on google docs](https://docs.google.com/spreadsheets/d/1M_sXd3EaRquolIaVKNciKrh7frPKTksfdzRr7jNa0Q0/edit#gid=0)  
+Run all jest tests with `yarn test`  
+Run a particular test suite with `yarn test ${file name}`  
+Run a load test with `artillery run ${file name}`  
+
+### What this project is built on
+[supertest](https://www.npmjs.com/package/supertest) to run api tests  
+[artillery](https://www.npmjs.com/package/artillery) to run load tests  
+[standard react/express/jest framework](https://www.digitalocean.com/community/tutorials/setting-up-a-node-project-with-typescript) as the base    
