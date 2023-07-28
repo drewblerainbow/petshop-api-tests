@@ -1,0 +1,39 @@
+# this is a sample load test, 
+# i dont want to overload the api since it is a third party application
+# so there is only one
+
+# LOAD-01 - store inventory load test
+# runs for 3 minutes and creates a max of 6 calls per second
+# thresholds should be sufficiently high for the test to produce ok results
+config:
+  target: https://petstore.swagger.io/v2/
+  phases:
+    - duration: 20
+      arrivalRate: 1 # using a low number of users to reduce load
+      rampTo: 2
+      name: Warm up phase
+    - duration: 20
+      arrivalRate: 3
+      rampTo: 4
+      name: Ramp up load
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 6
+      name: Spike phase
+  plugins:
+    ensure: {}
+    apdex: {}
+    metrics-by-endpoint: {}
+  apdex:
+    threshold: 1000
+  ensure:
+      thresholds:
+        - http.response_time.p99: 1000
+        - http.response_time.p95: 750
+
+scenarios:
+  - flow:
+      - loop:
+        - get:
+            url: "/store/inventory"
+        count: 3

@@ -18,7 +18,7 @@ describe('PET-03 - get valid, available pet id', () => {
     it("Return 200 status, response body should contain the supplied id", async() => {
 
       // this is a test with an actual live id, fails if db is updated during the run
-      let petId = "1";
+      let petId = "77777";
 
       // use post to set up since our only access to the server is through the api
       let payload = {

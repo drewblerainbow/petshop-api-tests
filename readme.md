@@ -3,6 +3,7 @@ TODO: beautify readme
 run commands:  
 `yarn test` -> tests the entire project  
 `yarn test ${file name}` -> runs all tests in the specified file  
+`artillery run ${file name}` -> runs the load test
   
 test plan: [https://docs.google.com/spreadsheets/d/1M_sXd3EaRquolIaVKNciKrh7frPKTksfdzRr7jNa0Q0/edit#gid=0]  
   
