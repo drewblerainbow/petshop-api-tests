@@ -14,9 +14,9 @@ describe('USER-03 - get user by username', () => {
   describe('GIVEN an existing username is supplied', () => {
     it("Return 200 status, response body should contain the user's details", async() => {
 
-      let testUsername = "testUsername2";
-      let password = "password";
-      let payload = {
+      const testUsername = "testUsername2";
+      const password = "password";
+      const payload = {
         "id": 0,
         "username": testUsername,
         "firstName": "string",
@@ -26,16 +26,16 @@ describe('USER-03 - get user by username', () => {
         "phone": "string",
         "userStatus": 0
       };
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                             .post(postRoute)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
                             expect(postResponse.statusCode).toBe(200);
 
-      let response = await request(app).get(route(testUsername));
+      const response = await request(app).get(route(testUsername));
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.username).toContain(testUsername);
     })
   })
@@ -47,10 +47,10 @@ describe('USER-04 - get nonexistent user', () => {
   describe('GIVEN an nonexisting username is supplied', () => {
     it("Return 404 status, response body should contain the message 'User not found'", async() => {
 
-      let testUsername = "asdasfasdaw";
-      let response = await request(app).get(route(testUsername));
+      const testUsername = "asdasfasdaw";
+      const response = await request(app).get(route(testUsername));
       expect(response.statusCode).toBe(404);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.code).toBe(1);
       expect(body.message).toBe("User not found");
     })
@@ -62,10 +62,10 @@ describe('USER-04a - get nonexistent user (MOCKED)', () => {
   describe('GIVEN an nonexisting username is supplied', () => {
     it("Return 404 status, response body should contain the message 'User not found'", async() => {
 
-      let testUsername = "mockUsername";
-      let response = await request(app).get(route(testUsername));
+      const testUsername = "mockUsername";
+      const response = await request(app).get(route(testUsername));
       expect(response.statusCode).toBe(404);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.code).toBe(1);
       expect(body.message).toBe("User not found");
     })

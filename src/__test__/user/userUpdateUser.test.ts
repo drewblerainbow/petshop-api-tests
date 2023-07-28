@@ -15,8 +15,8 @@ describe('USER-05 - update user details', () => {
     it("Return 200 status, with the user id as a message", async() => {
 
       // set up to ensure the user exists
-      let username = "testUsername6"
-      let postPayload = {
+      const username = "testUsername6"
+      const postPayload = {
         "id": 0,
         "username": username,
         "firstName": "string",
@@ -26,16 +26,16 @@ describe('USER-05 - update user details', () => {
         "phone": "string",
         "userStatus": 0
       };
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                                 .post(postRoute)
                                 .send(postPayload)
                                 .set('Content-Type', 'application/json')
                                 .set('Accept', 'application/json');
       expect(postResponse.statusCode).toBe(200);
-      let postBody = JSON.parse(postResponse.text);
-      let userId = postBody.message;
+      const postBody = JSON.parse(postResponse.text);
+      const userId = postBody.message;
       
-      let payload = {
+      const payload = {
         "id": userId,
         "username": username,
         "firstName": "new name",
@@ -45,13 +45,13 @@ describe('USER-05 - update user details', () => {
         "phone": "string",
         "userStatus": 0
       }
-      let response = await request(app)
+      const response = await request(app)
                             .put(route(username))
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.code).toBe(200);      
       expect(body.message).toBe(userId);
     })

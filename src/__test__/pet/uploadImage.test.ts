@@ -17,11 +17,11 @@ describe('PET-15 - upload an image to an existing pet', () => {
   describe('GIVEN petId exists, upload an image to a pet', () => {
     it("Return 200 status, response message contains the specified file name", async() => {
 
-      let petId = 111;
-      let relativeFilePath = "./src/__test__/__testUtils__/resources/Untitled.png";
+      const petId = 111;
+      const relativeFilePath = "./src/__test__/__testUtils__/resources/Untitled.png";
 
       // use post to set up since our only access to the server is through the api
-      let createPayload = {
+      const createPayload = {
         "id": petId,
         "category": {
           "id": petId,
@@ -39,7 +39,7 @@ describe('PET-15 - upload an image to an existing pet', () => {
         ],
         "status": "available"
       }
-      let createResponse = await request(app)
+      const createResponse = await request(app)
                             .post(postRoute)
                             .send(createPayload)
                             .set('Content-Type', 'application/json')
@@ -47,7 +47,7 @@ describe('PET-15 - upload an image to an existing pet', () => {
       expect(createResponse.statusCode).toBe(200);
       // expect here to ensure pet is created before we can upload an image to it
 
-      let response = await fs.exists(relativeFilePath).then((exists: boolean)=>{
+      const response = await fs.exists(relativeFilePath).then((exists: boolean)=>{
         if (!exists){
           throw new Error("File not found");
         }
@@ -56,7 +56,7 @@ describe('PET-15 - upload an image to an existing pet', () => {
                 .attach('file', relativeFilePath);
       });
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.message).toContain("File uploaded to ./Untitled.png");
     })
   })
@@ -66,10 +66,10 @@ describe('PET-16 - no image specified when uploading', () => {
   describe('GIVEN petId exists, call upload method with no attachment', () => {
     it("Return 400 status", async() => {
 
-      let petId = 222;
+      const petId = 222;
 
       // use post to set up since our only access to the server is through the api
-      let createPayload = {
+      const createPayload = {
         "id": petId,
         "category": {
           "id": petId,
@@ -87,7 +87,7 @@ describe('PET-16 - no image specified when uploading', () => {
         ],
         "status": "available"
       }
-      let createResponse = await request(app)
+      const createResponse = await request(app)
                             .post(postRoute)
                             .send(createPayload)
                             .set('Content-Type', 'application/json')
@@ -95,10 +95,10 @@ describe('PET-16 - no image specified when uploading', () => {
       expect(createResponse.statusCode).toBe(200);
       // expect here to ensure pet is created before we can upload an image to it
 
-      let response = await request(app)
+      const response = await request(app)
                             .post(route(petId));
       expect(response.statusCode).toBe(415);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.message).toContain("application/octet-stream was not found");
     })
   })

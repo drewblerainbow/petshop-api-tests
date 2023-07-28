@@ -11,9 +11,9 @@ describe('USER-10 - create user', () => {
   describe('GIVEN user is created', () => {
     it("Return 200 status, with response containing code 200 and a non null user id as message", async() => {
 
-      let username = "testUsername1"
-      let password = "password";
-      let payload = {
+      const username = "testUsername1"
+      const password = "password";
+      const payload = {
         "id": 0,
         "username": username,
         "firstName": "string",
@@ -24,13 +24,13 @@ describe('USER-10 - create user', () => {
         "userStatus": 0
       };
       
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                             .post(route)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
       expect(postResponse.statusCode).toBe(200);
-      let body = JSON.parse(postResponse.text);
+      const body = JSON.parse(postResponse.text);
       expect(body.code).toBe(200);
     })
   })

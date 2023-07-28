@@ -11,7 +11,7 @@ describe('USER-02 - create users with list', () => {
   describe('GIVEN a list of users is supplied', () => {
     it("Return 200 status, with response message ok", async() => {
 
-      let payload = [
+      const payload = [
         {
           "id": 0,
           "username": "listname1",
@@ -34,13 +34,13 @@ describe('USER-02 - create users with list', () => {
         }
       ];
       
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                             .post(route)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
       expect(postResponse.statusCode).toBe(200);
-      let body = JSON.parse(postResponse.text);
+      const body = JSON.parse(postResponse.text);
       expect(body.code).toBe(200);
       expect(body.message).toBe("ok");
     })

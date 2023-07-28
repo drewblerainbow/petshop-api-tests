@@ -11,9 +11,9 @@ describe('USER-09 - log out', () => {
   describe('GIVEN a user is logged in, and tries to log out', () => {
     it("Return 200 status, message should say ok", async() => {
 
-      let response = await request(app).get(route);
+      const response = await request(app).get(route);
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.message).toBe("ok");
     })
   })

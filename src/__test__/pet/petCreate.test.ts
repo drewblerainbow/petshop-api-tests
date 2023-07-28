@@ -12,7 +12,7 @@ describe('PET-10 - add a pet to the store', () => {
     it("Return 200 status, response body should contain the correct name (in this case the timestamp)", async() => {
 
       const epoch = Date.now();
-      let payload = {
+      const payload = {
         "id": 0,
         "category": {
           "id": 0,
@@ -30,14 +30,14 @@ describe('PET-10 - add a pet to the store', () => {
         ],
         "status": "available"
       }
-      let response = await request(app)
+      const response = await request(app)
                             .post(route)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
 
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.name).toBe(epoch.toString());
     })
   })

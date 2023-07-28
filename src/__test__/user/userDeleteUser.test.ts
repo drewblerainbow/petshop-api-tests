@@ -15,9 +15,9 @@ describe('USER-06 - delete user', () => {
   describe('GIVEN an existing user is deleted', () => {
     it("Return 200 status, with response message containing the deleted username", async() => {
 
-      let username = "testUsername3"
+      const username = "testUsername3"
       // set up to ensure the user exists
-      let payload = {
+      const payload = {
         "id": 0,
         "username": username,
         "firstName": "string",
@@ -27,16 +27,16 @@ describe('USER-06 - delete user', () => {
         "phone": "string",
         "userStatus": 0
       };
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                             .post(postRoute)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
       expect(postResponse.statusCode).toBe(200);
       
-      let response = await request(app).delete(route(username));
+      const response = await request(app).delete(route(username));
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.code).toBe(200);
       expect(body.message).toBe(username);
     })
@@ -49,8 +49,8 @@ describe('USER-07 - delete nonexistent user', () => {
   describe('GIVEN an invalid user is deleted', () => {
     it("Return 404 not found", async() => {
 
-      let username = "asdafasdasdsa"
-      let response = await request(app).delete(route(username));
+      const username = "asdafasdasdsa"
+      const response = await request(app).delete(route(username));
       expect(response.statusCode).toBe(404);
     })
   })
@@ -61,7 +61,7 @@ describe('USER-07a - delete nonexistent user (MOCKED)', () => {
   describe('GIVEN an invalid user is deleted', () => {
     it("Return 404 not found", () => {
 
-      let username = "mockUsername"
+      const username = "mockUsername"
       let response = mocks(route(username));
       expect(response.statusCode).toBe(404);
     })

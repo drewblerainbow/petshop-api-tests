@@ -18,10 +18,10 @@ describe('PET-03 - get valid, available pet id', () => {
     it("Return 200 status, response body should contain the supplied id", async() => {
 
       // this is a test with an actual live id, fails if db is updated during the run
-      let petId = "77777";
+      const petId = "77777";
 
       // use post to set up since our only access to the server is through the api
-      let payload = {
+      const payload = {
         "id": petId,
         "category": {
           "id": petId,
@@ -39,7 +39,7 @@ describe('PET-03 - get valid, available pet id', () => {
         ],
         "status": "available"
       }
-      let postResponse = await request(app)
+      const postResponse = await request(app)
                             .post(postRoute)
                             .send(payload)
                             .set('Content-Type', 'application/json')
@@ -47,9 +47,9 @@ describe('PET-03 - get valid, available pet id', () => {
       expect(postResponse.statusCode).toBe(200);
       // expect here to ensure item is created before we can delete it
 
-      let response = await request(app).get(route(petId));
+      const response = await request(app).get(route(petId));
       expect(response.statusCode).toBe(200);
-      let body = JSON.parse(response.text);
+      const body = JSON.parse(response.text);
       expect(body.id.toString()).toBe(petId);
     })
   })
@@ -60,12 +60,12 @@ describe('PET-03a - get valid, available pet id (MOCKED)', () => {
     it("Return 200 status, response body should contain the supplied id", () => {
 
       // same test as above but mocked to get expected values so it can pass without needed set up
-      let petId = "1";
-      // let response = await request(app).get(route(petId)); <- mocked
-      let response = mocks(route(petId));
+      const petId = "1";
+      // const response = await request(app).get(route(petId)); <- mocked
+      const response = mocks(route(petId));
 
       expect(response.statusCode).toBe(200);
-      let body = response.text;
+      const body = response.text;
       expect(body.id.toString()).toBe(petId);
     })
   })
@@ -76,11 +76,11 @@ describe('PET-04 - get valid, unavailable pet id', () => {
   describe('GIVEN petId does not exist', () => {
     it("Return 404 status, with not found message", async() => {
 
-      let petId = "-1";
-      let response = await request(app).get(route(petId));
+      const petId = "-1";
+      const response = await request(app).get(route(petId));
 
       expect(response.statusCode).toBe(404);
-      let errorBody = JSON.parse(response.text);
+      const errorBody = JSON.parse(response.text);
       expect(errorBody.code).toBe(1);
       expect(errorBody.message).toBe("Pet not found");
     })
@@ -91,11 +91,11 @@ describe('PET-05 - get invalid pet id', () => {
   describe('GIVEN petId is non numeric', () => {
     it("Return a 404 status, throw an invalid input string exception", async() => {
 
-      let petId = "asdf";
-      let response = await request(app).get(route(petId));
+      const petId = "asdf";
+      const response = await request(app).get(route(petId));
       
       expect(response.statusCode).toBe(404);
-      let errorBody = JSON.parse(response.text);
+      const errorBody = JSON.parse(response.text);
       expect(errorBody.message).toBe(`java.lang.NumberFormatException: For input string: \"${petId}\"`);
     })
   })

@@ -13,13 +13,13 @@ describe('PET-01 - find by name and category', () => {
   describe('GIVEN 1 pet with name "pupo" and category "pajaro" exists', () => {
     it("Return 200 status, response body should contain the supplied name and category", () => {
 
-      let petName = "pupo";
-      let petCategory = "pajaro";
-      // let response = await request(app).get(`/pet/find?name=${petName}?category=${petCategory}`); <- mock
-      let response = mocks(`/pet/find?name=${petName}&category=${petCategory}`);
+      const petName = "pupo";
+      const petCategory = "pajaro";
+      // const response = await request(app).get(`/pet/find?name=${petName}?category=${petCategory}`); <- mock
+      const response = mocks(`/pet/find?name=${petName}&category=${petCategory}`);
 
       expect(response.statusCode).toBe(200);
-      let body = response.text;
+      const body = response.text;
       expect(body.name).toBe(petName);
       expect(body.category.name).toBe(petCategory);
     })
@@ -30,12 +30,12 @@ describe('PET-02 - find by category, no pet exists', () => {
   describe('GIVEN no pets in this category exist', () => {
     it("Return 404 status, with not found message", () => {
 
-      let petCategory = "human";
-      // let response = await request(app).get(`/pet/find?category=${petCategory}`); <- mocked
-      let response = mocks(`/pet/find?category=${petCategory}`);
+      const petCategory = "human";
+      // const response = await request(app).get(`/pet/find?category=${petCategory}`); <- mocked
+      const response = mocks(`/pet/find?category=${petCategory}`);
 
       expect(response.statusCode).toBe(404);
-      let errorBody = response.text;
+      const errorBody = response.text;
       expect(errorBody.code).toBe(1);
       expect(errorBody.message).toBe("Pet not found");
     })
