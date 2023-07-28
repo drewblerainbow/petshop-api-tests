@@ -5,8 +5,9 @@
 import request from 'supertest'
 
 const app = "https://petstore.swagger.io/v2";
+const route = '/pet'
 
-describe('update an existing pet', () => {
+describe('PET-14 - update an existing pet', () => {
   describe('GIVEN pet exists with some details, users should be able to update those details', () => {
     it("Return 200 status, response body should contain the updated values", async() => {
 
@@ -38,7 +39,7 @@ describe('update an existing pet', () => {
         "status": "available"
       }
       let createResponse = await request(app)
-                          .post('/pet/')
+                          .post(route)
                           .send(payload)
                           .set('Content-Type', 'application/json')
                           .set('Accept', 'application/json');
@@ -69,14 +70,13 @@ describe('update an existing pet', () => {
         "status": "available"
       }
       let response = await request(app)
-                            .put('/pet/')
+                            .put(route)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');
 
       expect(response.statusCode).toBe(200);
       let body = JSON.parse(response.text);
-      console.log(body);
       // ensure relevant fields are updated
       expect(body.name).toBe(newName);
       expect(body.category.name).toBe(newCategory);

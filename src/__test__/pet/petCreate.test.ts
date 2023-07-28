@@ -5,8 +5,9 @@
 import request from 'supertest'
 
 const app = "https://petstore.swagger.io/v2";
+const route = '/pet/';
 
-describe('add a pet to the store', () => {
+describe('PET-10 - add a pet to the store', () => {
   describe('GIVEN pet is created with a specified name', () => {
     it("Return 200 status, response body should contain the correct name (in this case the timestamp)", async() => {
 
@@ -30,7 +31,7 @@ describe('add a pet to the store', () => {
         "status": "available"
       }
       let response = await request(app)
-                            .post('/pet/')
+                            .post(route)
                             .send(payload)
                             .set('Content-Type', 'application/json')
                             .set('Accept', 'application/json');

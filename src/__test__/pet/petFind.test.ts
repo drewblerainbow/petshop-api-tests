@@ -9,7 +9,7 @@ import { mocks } from '../__testUtils__/mocks/apiMocks'
 
 const app = "https://petstore.swagger.io/v2";
 
-describe('find by name and category', () => {
+describe('PET-01 - find by name and category', () => {
   describe('GIVEN 1 pet with name "pupo" and category "pajaro" exists', () => {
     it("Return 200 status, response body should contain the supplied name and category", () => {
 
@@ -26,7 +26,7 @@ describe('find by name and category', () => {
   })
 })
 
-describe('input for category is valid but no pet found', () => {
+describe('PET-02 - find by category, no pet exists', () => {
   describe('GIVEN no pets in this category exist', () => {
     it("Return 404 status, with not found message", () => {
 
