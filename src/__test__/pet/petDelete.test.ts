@@ -1,6 +1,6 @@
 /* tests for this route:
   DELETE
-  /pet/${petId}
+  /pet/{petId}
 */
 import request from 'supertest'
 import { mocks } from '../__testUtils__/mocks/apiMocks'

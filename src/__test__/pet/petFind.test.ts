@@ -16,7 +16,7 @@ describe('PET-01 - find by name and category', () => {
       let petName = "pupo";
       let petCategory = "pajaro";
       // let response = await request(app).get(`/pet/find?name=${petName}?category=${petCategory}`); <- mock
-      let response = mocks(`/pet/find?name=${petName}?category=${petCategory}`);
+      let response = mocks(`/pet/find?name=${petName}&category=${petCategory}`);
 
       expect(response.statusCode).toBe(200);
       let body = response.text;

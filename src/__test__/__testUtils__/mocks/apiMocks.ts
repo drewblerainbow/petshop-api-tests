@@ -1,6 +1,6 @@
 export const mocks = function(mockedApi){
   switch(mockedApi) {
-    case "/pet/find?name=pupo?category=pajaro":
+    case "/pet/find?name=pupo&category=pajaro":
       return {
         "statusCode": 200,
         "text": {
@@ -51,6 +51,15 @@ export const mocks = function(mockedApi){
             "code": 200, 
             "type": "unknown",
             "message": "99"
+          }
+        };
+      case "/user/mockUsername":
+        return {
+          "statusCode": 404,
+          "text": {
+            "code": 1,
+            "type": "error",
+            "message": "User not found"
           }
         };
     default:

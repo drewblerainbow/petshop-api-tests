@@ -1,6 +1,6 @@
 /* tests for this route:
   GET
-  /pet/findByStatus?status=${statusParam}
+  /pet/findByStatus/?status={statusParam}
 */
 import request from 'supertest'
 
