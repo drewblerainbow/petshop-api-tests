@@ -15,9 +15,9 @@ you should be able to run the load test now
 ##### How to run tests:  
 Run all jest tests with `yarn test`  
 Run a particular test suite with `yarn test ${file name}`  
-![jest run](https://github.com/drewblerainbow/petshop-api-tests/tree/main/images/Capture_jest.png)  
+![jest test](https://github.com/drewblerainbow/petshop-api-tests/blob/main/images/Capture_jest.PNG?raw=true)  
 Run a load test with `artillery run ${path_to_file_name}`  
-![load test run](https://github.com/drewblerainbow/petshop-api-tests/tree/main/images/Capture_load.png)
+![load test](https://github.com/drewblerainbow/petshop-api-tests/blob/main/images/Capture_load.PNG?raw=true)  
 ##### [Test plan on google docs](https://docs.google.com/spreadsheets/d/1M_sXd3EaRquolIaVKNciKrh7frPKTksfdzRr7jNa0Q0/edit#gid=0)  
 
 ##### API Tests
