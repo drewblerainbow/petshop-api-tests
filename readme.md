@@ -1,6 +1,4 @@
-# API Tests
-  
-### Using [petstore](https://petstore.swagger.io/#/)
+## API tests using [petstore](https://petstore.swagger.io/#/)
 
 ##### How to run tests:  
 ##### [Test plan on google docs](https://docs.google.com/spreadsheets/d/1M_sXd3EaRquolIaVKNciKrh7frPKTksfdzRr7jNa0Q0/edit#gid=0)  
