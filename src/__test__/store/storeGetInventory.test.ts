@@ -15,7 +15,6 @@ describe('STORE-06 - get store inventory', () => {
       expect(response.statusCode).toBe(200);
 
       const body = JSON.parse(response.text);
-      console.log(body);
       expect(body.available).not.toBe(null);
     })
   })

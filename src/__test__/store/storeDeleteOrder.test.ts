@@ -34,7 +34,6 @@ describe('STORE-04 - delete an existing order', () => {
       const deleteResponse = await request(app).delete(route(orderId));
       expect(deleteResponse.statusCode).toBe(200);
       const body = JSON.parse(deleteResponse.text);
-      console.log(body);
       expect(body.message).toBe(orderId.toString());
     })
   })
